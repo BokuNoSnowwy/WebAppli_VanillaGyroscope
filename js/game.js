@@ -5,20 +5,20 @@ const ctx = canvas.getContext('2d');
 
 function rect_create(x,y,w,h,color,dx,dy){
     let obj = {
-        x = x,
-        y = y,
-        w = w,
-        h = h,
+        x : x,
+        y : y,
+        w : w,
+        h : h,
         color : color,
-        dx = dx,
-        dy = dy,
+        dx : dx,
+        dy : dy,
         draw : rect_draw
     }
     return obj
 }
 
 let rect = rect_create(10,20,30,50,'red',3,3)
-let rect2 = rect_create(100,20,30,50,'green',2,3)
+let rect2 = rect_create(100,20,30,50,'blue',2,3)
 
 let gameobjects = [
     rect,
@@ -32,8 +32,6 @@ img.src = 'DVD_video_logo.pnj'
 
 
 function gameLoop(){
-
-
     ctx.fillStyle = 'green';
     ctx.fillRect(0, 0, canvas.width, canvas.height); 
     
@@ -42,7 +40,7 @@ function gameLoop(){
     gameobjects.forEach((obj) => obj.draw())
 }
 
-function rect_Draw(){
+function rect_draw(){
     ctx.fillStyle = this.color;
     ctx.fillRect(this.x,this.y,this.w,this.h);
 
