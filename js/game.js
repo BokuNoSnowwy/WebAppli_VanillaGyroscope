@@ -1,70 +1,70 @@
 const canvas = document.getElementById('canvasTest');
 const ctx = canvas.getContext('2d');
 
-canvas.width = document.documentElement.clientWidth
+//canvas.width = document.documentElement.clientWidth
 
-
-let rect = {
-    x = 50,
-    y = 10,
-    w = 150,
-    h = 100,
-    color : 'red',
-    dx = 2,
-    dy = 2
+function rect_create(x,y,w,h,color,dx,dy){
+    let obj = {
+        x = x,
+        y = y,
+        w = w,
+        h = h,
+        color : color,
+        dx = dx,
+        dy = dy,
+        draw : rect_draw
+    }
+    return obj
 }
 
-let xAdd = 1
-let yAdd = 1
+let rect = rect_create(10,20,30,50,'red',3,3)
+let rect2 = rect_create(100,20,30,50,'green',2,3)
+
+let gameobjects = [
+    rect,
+    rect2
+]
 
 let frame = 0
-let variable = "Hello"
 
 var img = new Image();
 img.src = 'DVD_video_logo.pnj'
 
 
-
-
 function gameLoop(){
-
-    let widthRectangle = 100
-    let heighRectangle = 100
 
 
     ctx.fillStyle = 'green';
     ctx.fillRect(0, 0, canvas.width, canvas.height); 
     
     //ctx.drawImage(img, x,y, widthRectangle,heighRectangle)
-    
-    ctx.fillStyle = 'red';
-    ctx.fillRect(x, y, widthRectangle, heighRectangle); 
-    
 
-        if(x + widthRectangle > canvas.width){
-            xAdd = -1
-        }
-
-        if(x < 0){
-            xAdd = 1
-        }
-
-        if(y + heighRectangle > canvas.height){
-            yAdd = -1
-        }
-
-        if(y < 0){
-            yAdd = 1
-        }
-    
-
-    x += xAdd
-    y += yAdd
-
+    gameobjects.forEach((obj) => obj.draw())
 }
 
-function rectDraw(){
+function rect_Draw(){
+    ctx.fillStyle = this.color;
+    ctx.fillRect(this.x,this.y,this.w,this.h);
+
     
+    if(this.x + this.w > canvas.width){
+        this.dx = -this.dx
+    }
+
+    if(this.x < 0){
+        this.dx = Math.abs(this.dx)
+    }
+
+    if(this.y + this.h > canvas.height){
+        this.dy = -this.dy
+    }
+
+    if(this.y < 0){
+        this.dy = Math.abs(this.dy)
+    }
+
+    this.x += this.dx;
+    this.y += this.dy;
 }
 
 setInterval(gameLoop,1000 /60)
