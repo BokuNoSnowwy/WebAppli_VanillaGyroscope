@@ -82,6 +82,8 @@ function gameLoop(){
 
 
     gameobjects.forEach((obj) => obj.draw())
+    gameobjects.forEach((obj) => obj.dx = gyroValue.x);
+    gameobjects.forEach((obj) => obj.dy = gyroValue.z);
 }
 
 function rect_draw(){
@@ -105,8 +107,8 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += gyroValue.x;
-    this.y += gyroValue.z;
+    this.x += this.dx;
+    this.y += this.dy;
 }
 
 setInterval(gameLoop,1000 /60)
