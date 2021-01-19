@@ -126,8 +126,13 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += acl.x * -1;
-    this.y += acl.y;
+    if(this.x + this.w > canvas.width && this.y + this.h > canvas.height){
+        this.x += acl.x * -1;
+        this.y += acl.y;
+    }else{
+        this.x += 0;
+        this.y += 0;
+    }
 }
 
 setInterval(gameLoop,1000 /60)
