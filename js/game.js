@@ -49,13 +49,29 @@ let gyroValue = {
     z: 0
 }
 
+let acceValue = {
+    x: 0,
+    y: 0,
+    z: 0
+}
+
 let gyroscope = new Gyroscope({frequency: 60});
 
 gyroscope.addEventListener('reading', e => {
   gyroValue.x += gyroscope.x;
   gyroValue.y += gyroscope.y;
   gyroValue.z += gyroscope.z;
-  document.getElementById("gyro").innerHTML = Math.floor(gyroValue.x) + "<br>" + Math.floor(gyroValue.y) + "<br>" + Math.floor(gyroValue.z)
+  
+});
+
+let acl = new Accelerometer({frequency: 60});
+
+acl.addEventListener('reading', () => {
+  acceValue.x += acl.x;
+  acceValue.y += acl.y;
+  acceValue.z += acl.x;
+
+  //gameLoop
 });
 
 
@@ -74,7 +90,8 @@ function gameLoop(){
     
     //ctx.drawImage(img, x,y, widthRectangle,heighRectangle)
     debugText.textContent = "Debug console : ";
-    debugText.textContent += "xGyro : " + Math.round(gyroValue.x) + "  yGyro : " + Math.round(gyroValue.y) + "  zGyro : " + Math.round(gyroValue.z);
+    //debugText.textContent += "xGyro : " + Math.round(gyroValue.x) + "  yGyro : " + Math.round(gyroValue.y) + "  zGyro : " + Math.round(gyroValue.z);
+    debugText.textContent += "xAcc : " + Math.round(acceValue.x) + "  yAcc : " + Math.round(acceValue.y) + "  zAcc : " + Math.round(acceValue.z);
 
     console.log(gyroValue.x);
     console.log(gyroValue.y);
@@ -84,6 +101,9 @@ function gameLoop(){
     gameobjects.forEach((obj) => obj.draw())
     gameobjects.forEach((obj) => obj.dx = gyroValue.x);
     gameobjects.forEach((obj) => obj.dy = gyroValue.z);
+
+    gameobjects.forEach((obj) => obj.dx = acceValue.x);
+    gameobjects.forEach((obj) => obj.dy = acceValue.y);
 }
 
 function rect_draw(){
@@ -112,17 +132,6 @@ function rect_draw(){
 }
 
 setInterval(gameLoop,1000 /60)
-
-let acl = new Accelerometer({frequency: 60});
-
-acl.addEventListener('reading', () => {
-  console.log("Acceleration along the X-axis " + acl.x);
-  console.log("Acceleration along the Y-axis " + acl.y);
-  console.log("Acceleration along the Z-axis " + acl.z);
-  //gameLoop
-});
-
-
 
 
 function startup() {
