@@ -55,7 +55,7 @@ let acceValue = {
     z: 0
 }
 
-let gyroscope = new Gyroscope({frequency: 15});
+let gyroscope = new Gyroscope({frequency: 60});
 
 gyroscope.addEventListener('reading', e => {
   gyroValue.x += gyroscope.x;
@@ -64,7 +64,7 @@ gyroscope.addEventListener('reading', e => {
   
 });
 
-let acl = new Accelerometer({frequency: 15});
+let acl = new Accelerometer({frequency: 60});
 
 acl.addEventListener('reading', () => {
   acceValue.x = acl.x;
@@ -103,11 +103,11 @@ function gameLoop(){
 
 
     gameobjects.forEach((obj) => obj.draw())
-    gameobjects.forEach((obj) => obj.dx = gyroValue.x);
-    gameobjects.forEach((obj) => obj.dy = gyroValue.z);
+    gameobjects.forEach((obj) => obj.dx = 0);
+    gameobjects.forEach((obj) => obj.dy = 0);
 
-    gameobjects.forEach((obj) => obj.dx = acceValue.x);
-    gameobjects.forEach((obj) => obj.dy = acceValue.y);
+    gameobjects.forEach((obj) => obj.dx = 0);
+    gameobjects.forEach((obj) => obj.dy = 0);
 }
 
 function rect_draw(){
@@ -131,8 +131,8 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += this.dx;
-    this.y += this.dy;
+    this.x += acceValue.x;
+    this.y += acceValue.y;
 }
 
 setInterval(gameLoop,1000 /60)
