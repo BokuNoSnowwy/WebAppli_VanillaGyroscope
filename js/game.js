@@ -126,7 +126,7 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x -= acl.x;
+    this.x += acl.x;
     this.y += acl.y;
 }
 
