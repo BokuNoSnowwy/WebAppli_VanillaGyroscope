@@ -87,7 +87,7 @@ gyroscope.addEventListener('reading', e => {
 
 
 function startup() {
-    canvas.addEventListener("touchstart", handleStart, false);
+    canvas.addEventListener("mouseup", handleStart, false);
     //canvas.addEventListener("touchend", handleEnd, false);
     //canvas.addEventListener("touchcancel", handleCancel, false);
     canvas.addEventListener("touchmove", handleMove, false);
@@ -96,21 +96,10 @@ function startup() {
   document.addEventListener("DOMContentLoaded", startup);
 
 function handleStart(evt) {
-    let rect2 = rect_create(100,20,30,50,'blue',2,3)
+    let rect2 = rect_create(100,20,30,50,'blue',2,3);
+    gameobjects.push(rect2);
     evt.preventDefault();
     console.log("touchstart.");
-    var touches = evt.changedTouches;
-
-    for (var i = 0; i < touches.length; i++) {
-        console.log("touchstart:" + i + "...");
-        ongoingTouches.push(copyTouch(touches[i]));
-        var color = colorForTouch(touches[i]);
-        ctx.beginPath();
-        ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
-        ctx.fillStyle = color;
-        ctx.fill();
-        console.log("touchstart:" + i + ".");
-    }
 }
   
 function handleMove(evt) {
