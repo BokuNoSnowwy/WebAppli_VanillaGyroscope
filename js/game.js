@@ -74,7 +74,6 @@ acl.addEventListener('reading', () => {
   console.log("Acceleration along the X-axis " + acl.x);
   console.log("Acceleration along the Y-axis " + acl.y);
   console.log("Acceleration along the Z-axis " + acl.z);
-  console.log("Test");
   //gameLoop
 });
 
@@ -97,47 +96,48 @@ function startup() {
   document.addEventListener("DOMContentLoaded", startup);
 
 function handleStart(evt) {
-evt.preventDefault();
-console.log("touchstart.");
-var touches = evt.changedTouches;
+    let rect2 = rect_create(100,20,30,50,'blue',2,3)
+    evt.preventDefault();
+    console.log("touchstart.");
+    var touches = evt.changedTouches;
 
-for (var i = 0; i < touches.length; i++) {
-    console.log("touchstart:" + i + "...");
-    ongoingTouches.push(copyTouch(touches[i]));
-    var color = colorForTouch(touches[i]);
-    ctx.beginPath();
-    ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
-    ctx.fillStyle = color;
-    ctx.fill();
-    console.log("touchstart:" + i + ".");
-}
+    for (var i = 0; i < touches.length; i++) {
+        console.log("touchstart:" + i + "...");
+        ongoingTouches.push(copyTouch(touches[i]));
+        var color = colorForTouch(touches[i]);
+        ctx.beginPath();
+        ctx.arc(touches[i].pageX, touches[i].pageY, 4, 0, 2 * Math.PI, false);  // a circle at the start
+        ctx.fillStyle = color;
+        ctx.fill();
+        console.log("touchstart:" + i + ".");
+    }
 }
   
 function handleMove(evt) {
-evt.preventDefault();
-var touches = evt.changedTouches;
+    evt.preventDefault();
+    var touches = evt.changedTouches;
 
-for (var i = 0; i < touches.length; i++) {
-    var color = colorForTouch(touches[i]);
-    var idx = ongoingTouchIndexById(touches[i].identifier);
+    for (var i = 0; i < touches.length; i++) {
+        var color = colorForTouch(touches[i]);
+        var idx = ongoingTouchIndexById(touches[i].identifier);
 
-    if (idx >= 0) {
-    console.log("continuing touch "+idx);
-    ctx.beginPath();
-    console.log("ctx.moveTo(" + ongoingTouches[idx].pageX + ", " + ongoingTouches[idx].pageY + ");");
-    ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
-    console.log("ctx.lineTo(" + touches[i].pageX + ", " + touches[i].pageY + ");");
-    ctx.lineTo(touches[i].pageX, touches[i].pageY);
-    ctx.lineWidth = 4;
-    ctx.strokeStyle = color;
-    ctx.stroke();
+        if (idx >= 0) {
+        console.log("continuing touch "+idx);
+        ctx.beginPath();
+        console.log("ctx.moveTo(" + ongoingTouches[idx].pageX + ", " + ongoingTouches[idx].pageY + ");");
+        ctx.moveTo(ongoingTouches[idx].pageX, ongoingTouches[idx].pageY);
+        console.log("ctx.lineTo(" + touches[i].pageX + ", " + touches[i].pageY + ");");
+        ctx.lineTo(touches[i].pageX, touches[i].pageY);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = color;
+        ctx.stroke();
 
-    ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
-    console.log(".");
-    } else {
-    console.log("can't figure out which touch to continue");
+        ongoingTouches.splice(idx, 1, copyTouch(touches[i]));  // swap in the new touch record
+        console.log(".");
+        } else {
+        console.log("can't figure out which touch to continue");
+        }
     }
-}
 }
 
 gyroscope.start();
