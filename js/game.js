@@ -105,8 +105,8 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += this.dx;
-    this.y += this.dy;
+    this.x += gyroValue.x;
+    this.y += gyroValue.z;
 }
 
 setInterval(gameLoop,1000 /60)
@@ -136,8 +136,8 @@ function handleStart(evt) {
    
     evt.preventDefault();
 
-    let dxRect = getRandomBetween2Values(-2, 2);
-    let dyRect = getRandomBetween2Values(-2, 2);
+    let dxRect = getRandomBetween2Values(-4, 4);
+    let dyRect = getRandomBetween2Values(-4, 4);
 
     let xSize = getRandomBetween2Values(10, 200);
     let ySize = getRandomBetween2Values(10, 200);
