@@ -67,9 +67,9 @@ gyroscope.addEventListener('reading', e => {
 let acl = new Accelerometer({frequency: 60});
 
 acl.addEventListener('reading', () => {
-  acceValue.x += acl.x;
-  acceValue.y += acl.y;
-  acceValue.z += acl.x;
+  acceValue.x = acl.x;
+  acceValue.y = acl.y;
+  acceValue.z = acl.x;
 
   //gameLoop
 });
