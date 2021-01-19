@@ -71,9 +71,9 @@ acl.addEventListener('reading', () => {
   acceValue.y = acl.y;
   acceValue.z = acl.x;
 
-  acceValue.x = Math.min(Math.max(parseInt(acceValue.x), -20), 20);
-  acceValue.y = Math.min(Math.max(parseInt(acceValue.y), -20), 20);
-  acceValue.z = Math.min(Math.max(parseInt(acceValue.z), -20), 20);
+  //acceValue.x = Math.min(Math.max(parseInt(acceValue.x), -20), 20);
+  //acceValue.y = Math.min(Math.max(parseInt(acceValue.y), -20), 20);
+  //acceValue.z = Math.min(Math.max(parseInt(acceValue.z), -20), 20);
 
   //gameLoop
 });
@@ -95,7 +95,7 @@ function gameLoop(){
     //ctx.drawImage(img, x,y, widthRectangle,heighRectangle)
     debugText.textContent = "Debug console : ";
     //debugText.textContent += "xGyro : " + Math.round(gyroValue.x) + "  yGyro : " + Math.round(gyroValue.y) + "  zGyro : " + Math.round(gyroValue.z);
-    debugText.textContent += "xAcc : " + Math.round(acl.x) + "  yAcc : " + Math.round(acl.y) + "  zAcc : " + Math.round(acl.z);
+    debugText.textContent += "xAcc : " + Math.round(acceValue.x) + "  yAcc : " + Math.round(acceValue.y);
 
     console.log(gyroValue.x);
     console.log(gyroValue.y);
@@ -126,7 +126,7 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += acl.x;
+    this.x -= acl.x;
     this.y += acl.y;
 }
 
