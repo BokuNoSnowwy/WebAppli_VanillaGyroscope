@@ -1,7 +1,8 @@
 const canvas = document.getElementById('canvasTest');
 const ctx = canvas.getContext('2d');
 
-//canvas.width = document.documentElement.clientWidth
+canvas.width = document.documentElement.clientWidth || document.body.clientWidth;
+canvas.height = document.documentElement.clientHeight || document.body.clientHeight;
 
 function rect_create(x,y,w,h,color,dx,dy){
     let obj = {
@@ -66,3 +67,25 @@ function rect_draw(){
 }
 
 setInterval(gameLoop,1000 /60)
+
+
+let acl = new Accelerometer({frequency: 60});
+
+acl.addEventListener('reading', () => {
+  console.log("Acceleration along the X-axis " + acl.x);
+  console.log("Acceleration along the Y-axis " + acl.y);
+  console.log("Acceleration along the Z-axis " + acl.z);
+  gameLoop
+});
+
+let gyroscope = new Gyroscope({frequency: 60});
+
+gyroscope.addEventListener('reading', e => {
+  console.log("Angular velocity along the X-axis " + gyroscope.x);
+  console.log("Angular velocity along the Y-axis " + gyroscope.y);
+  console.log("Angular velocity along the Z-axis " + gyroscope.z);
+});
+
+
+gyroscope.start();
+acl.start();
