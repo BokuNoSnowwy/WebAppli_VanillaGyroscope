@@ -95,7 +95,7 @@ function gameLoop(){
     //ctx.drawImage(img, x,y, widthRectangle,heighRectangle)
     debugText.textContent = "Debug console : ";
     //debugText.textContent += "xGyro : " + Math.round(gyroValue.x) + "  yGyro : " + Math.round(gyroValue.y) + "  zGyro : " + Math.round(gyroValue.z);
-    debugText.textContent += "xAcc : " + Math.round(acceValue.x) + "  yAcc : " + Math.round(acceValue.y) + "  zAcc : " + Math.round(acceValue.z);
+    debugText.textContent += "xAcc : " + Math.round(acl.x) + "  yAcc : " + Math.round(acl.y) + "  zAcc : " + Math.round(acl.z);
 
     console.log(gyroValue.x);
     console.log(gyroValue.y);
@@ -103,11 +103,6 @@ function gameLoop(){
 
 
     gameobjects.forEach((obj) => obj.draw())
-    gameobjects.forEach((obj) => obj.dx = 0);
-    gameobjects.forEach((obj) => obj.dy = 0);
-
-    gameobjects.forEach((obj) => obj.dx = 0);
-    gameobjects.forEach((obj) => obj.dy = 0);
 }
 
 function rect_draw(){
@@ -131,8 +126,8 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    this.x += acceValue.x;
-    this.y += acceValue.y;
+    this.x += acl.x;
+    this.y += acl.y;
 }
 
 setInterval(gameLoop,1000 /60)
@@ -160,7 +155,7 @@ function handleStart(evt) {
     let color = colorsDrawing[getRandomInt(colorsDrawing.length)];
     
 
-    let rect = rect_create(evt.x,evt.y,xSize,ySize,color,dxRect,dyRect);
+    let rect = rect_create(evt.x,evt.y,xSize,ySize,color,0,0);
     gameobjects.push(rect);
 }
   
