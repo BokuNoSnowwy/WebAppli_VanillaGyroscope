@@ -162,7 +162,7 @@ function handleStart(evt) {
     let color = colorsDrawing[getRandomInt(colorsDrawing.length)];
     
 
-    let rect = rect_create(evt.x,evt.y,xSize,ySize,color,0,0);
+    let rect = rect_create(evt.x-1,evt.y-1,xSize,ySize,color,0,0);
     gameobjects.push(rect);
 }
   
