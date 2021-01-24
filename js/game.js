@@ -126,6 +126,7 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
+    /*
     if(this.x + this.w > canvas.width || this.y + this.h > canvas.height){
         console.log(this + "Touches")
         this.x += 0;
@@ -134,7 +135,7 @@ function rect_draw(){
         console.log(this + "Inside")
         this.x += acl.x * -1;
         this.y += acl.y;
-    }
+    }*/
 }
 
 setInterval(gameLoop,1000 /60)
@@ -153,11 +154,11 @@ function handleStart(evt) {
    
     evt.preventDefault();
 
-    let dxRect = getRandomBetween2Values(-4, 4);
-    let dyRect = getRandomBetween2Values(-4, 4);
+    //let dxRect = getRandomBetween2Values(-4, 4);
+    //let dyRect = getRandomBetween2Values(-4, 4);
 
-    let xSize = getRandomBetween2Values(10, 200);
-    let ySize = getRandomBetween2Values(10, 200);
+    let xSize = getRandomBetween2Values(50, 200);
+    let ySize = getRandomBetween2Values(50, 200);
 
     let color = colorsDrawing[getRandomInt(colorsDrawing.length)];
     
