@@ -126,8 +126,8 @@ function rect_draw(){
         this.dy = Math.abs(this.dy)
     }
 
-    /*
-    if(this.x + this.w > canvas.width || this.y + this.h > canvas.height){
+    
+    if(this.x + this.w > canvas.width){
         console.log(this + "Touches")
         this.x += 0;
         this.y += 0;
@@ -135,7 +135,7 @@ function rect_draw(){
         console.log(this + "Inside")
         this.x += acl.x * -1;
         this.y += acl.y;
-    }*/
+    }
 }
 
 setInterval(gameLoop,1000 /60)
