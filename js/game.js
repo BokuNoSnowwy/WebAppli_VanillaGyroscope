@@ -139,8 +139,8 @@ function rect_draw(){
     }
     else{
         console.log(this + "Inside")
-        this.x += acl.x * -1 * 0.1*this.w/200;
-        this.y += acl.y * 0.1*this.w/200;
+        this.x += acl.x * -1 * 0.1*this.w;
+        this.y += acl.y * 0.1*this.w;
     }
 }
 
