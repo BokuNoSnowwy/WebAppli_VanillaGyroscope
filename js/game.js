@@ -129,7 +129,7 @@ function rect_draw(){
     
     if(this.x + this.w > canvas.width){
         console.log(this + "Touches")
-        this.x += 0;
+        this.x += 1;
         this.y += 0;
     }else{
         console.log(this + "Inside")
