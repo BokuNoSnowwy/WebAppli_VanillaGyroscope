@@ -135,12 +135,15 @@ function rect_draw(){
     else if(this.x < 0 || this.y < 0) {
         this.x += 0;
         this.y += 0;
-        this.color = "#000000";
     }
     else{
-        console.log(this + "Inside")
-        this.x += acl.x * -1 * 100/(this.w+this.h);
-        this.y += acl.y * 100/(this.w+this.h);
+        if(acl.x != 0){
+            this.x += acl.x * -1 * 100/(this.w+this.h);
+        }
+        
+        if(acl.y != 0){
+            this.y += acl.y * 100/(this.w+this.h);
+        }
     }
 }
 
