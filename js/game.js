@@ -89,7 +89,7 @@ function getRandomBetween2Values(min, max)
 }
 
 function gameLoop(){
-    ctx.fillStyle = 'white';
+    //ctx.fillStyle = 'white';
     ctx.fillRect(0, 0, canvas.width, canvas.height); 
     
     //ctx.drawImage(img, x,y, widthRectangle,heighRectangle)
