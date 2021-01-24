@@ -127,10 +127,17 @@ function rect_draw(){
     }
 
     
-    if(this.x + this.w > canvas.width || this.y + this.h > canvas.height){
+    if(this.x + this.w > canvas.width || this.x + this.w < 0 || this.y + this.h > canvas.height || this.y + this.h < 0){
         console.log(this + "Touches")
-        this.x += 0;
+        if(acceValue.x < 0)
+            this.x += 0;
+        else 
+            this.x += acl.x * -1 + 0.1*this.w/200;
+            
+        if(acceValue.y < 0)
         this.y += 0;
+        else
+            this.y += acl.y + 0.1*this.w/200;
     }else{
         console.log(this + "Inside")
         this.x += acl.x * -1 + 0.1*this.w/200;
